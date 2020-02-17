@@ -10,6 +10,7 @@ export class ClienteService{
 
    constructor(public http:HttpClient,public storage : StorageService){
    }
+   
 
    findByEmail(email: string) : Observable<ClienteDTO> {
     return this.http.get<ClienteDTO>(`${APICONFIG.baseUrl}/clientes/email?value=${email}`);
@@ -21,4 +22,15 @@ export class ClienteService{
      return this.http.get(url,{responseType : 'blob'});
 
    }
+
+   insert(obj : ClienteDTO) {
+    return this.http.post(
+        `${APICONFIG.baseUrl}/clientes`, 
+        obj,
+        { 
+            observe: 'response', 
+            responseType: 'text'
+        }
+    ); 
+}
 }
