@@ -23,14 +23,18 @@ export class ClienteService{
 
    }
 
-   insert(obj : ClienteDTO) {
+  insert(obj : ClienteDTO) {
     return this.http.post(
-        `${APICONFIG.baseUrl}/clientes`, 
+      `${APICONFIG.baseUrl}/clientes`, 
         obj,
         { 
-            observe: 'response', 
-            responseType: 'text'
-        }
-    ); 
-}
+          observe: 'response', 
+          responseType: 'text'
+          }
+      ); 
+  }
+ 
+  findById(id: string)  {
+    return this.http.get(`${APICONFIG.baseUrl}/clientes/${id}`);
+  }
 }
