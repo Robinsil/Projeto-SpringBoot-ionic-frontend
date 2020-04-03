@@ -35,15 +35,17 @@ export class OrderConfirmationPage {
 
   ionViewDidLoad() {
     this.cartItems = this.cartService.getCart().items;
+
     this.clienteService.findById(this.pedido.cliente.id)
-        .subscribe(response =>{
-          this.cliente = response as ClienteDTO;
-          this.endereco = this.findEndereco(this.pedido.enderecoDeEntrega.id,response['enderecos']);
-        },
-        error =>{
-          this.navCtrl.setRoot('HomePage');
-        })
+      .subscribe(response => {
+        this.cliente = response as ClienteDTO;
+        this.endereco = this.findEndereco(this.pedido.enderecoDeEntrega.id, response['enderecos']);
+      },
+      error => {
+        this.navCtrl.setRoot('HomePage');
+      });
   }
+  
   private findEndereco( id:string, list: EnderecoDTO[]):EnderecoDTO{
 
     let position = list.findIndex(x => x.id ==id);
